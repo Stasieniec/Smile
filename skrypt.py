@@ -16,7 +16,7 @@ import cv2
 import os
 import numpy as np
 
-sciezka = "C:/Projekty/Usmiechy"
+sciezka = "PATH"
 
 #%%
 
@@ -37,22 +37,23 @@ train_dataset.class_indices
 #%%
 model  = Sequential([Conv2D(32, (3,3), activation = 'relu', input_shape = (224, 224, 3)),
                      MaxPool2D(2,2),
-                     #
+                     
                      Conv2D(32,(3,3), activation = 'relu'),
                      MaxPool2D(2,2),
                      Conv2D(64,(3,3), activation = 'relu'),
                      MaxPool2D(2,2),
-                     #
+                     
                      Flatten(),
-                     #
+                     
                      Dense(64, activation  = 'relu'),
                      Dropout(0.5),
                      Dense(64, activation  = 'relu'),
                      Dropout(0.5),
-                     #
+                     
                      Dense(1, activation  = 'sigmoid')
     ]
     )
+
 
 model.compile(loss = 'binary_crossentropy',
               optimizer  = 'rmsprop',
@@ -63,9 +64,10 @@ model_fit = model.fit(train_dataset,
                       steps_per_epoch = 10,
                       validation_data  = validation_dataset)
 
+
 #%%
 
-dir_path = (sciezka + '/test/tak')
+dir_path = (sciezka + 'TEST YES')
 
 for  i in  os.listdir(dir_path):
     img = image.load_img(dir_path + '/' +  i, target_size = (224,224))
@@ -83,7 +85,7 @@ for  i in  os.listdir(dir_path):
         
         
 #%%
-img = image.load_img('C:/Projekty/Usmiechy/Laurka/batat.jpg', target_size = (224,224))
+img = image.load_img('TEST PHOTO', target_size = (224,224))
 plt.imshow(img)
 plt.show()  
 X = image.img_to_array(img)
